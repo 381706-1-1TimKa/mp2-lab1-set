@@ -313,3 +313,36 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, can_compare_for_equality)
+{
+	TBitField A(5);
+	A.SetBit(1);
+	A.SetBit(2);
+	A.SetBit(4);
+	TBitField B(5);
+	B.SetBit(1);
+	B.SetBit(2);
+	B.SetBit(4);
+	TBitField C(5);
+	C.SetBit(1);
+	ASSERT_TRUE(A == B);
+	ASSERT_FALSE(A == C);
+}
+
+TEST(TBitField, can_compare_for_unequality)
+{
+	TBitField A(5);
+	A.SetBit(1);
+	A.SetBit(2);
+	A.SetBit(4);
+	TBitField B(5);
+	B.SetBit(1);
+	B.SetBit(2);
+	B.SetBit(4);
+	TBitField C(5);
+	C.SetBit(1);
+	ASSERT_TRUE(A != C);
+	ASSERT_FALSE(A != B);
+}
+

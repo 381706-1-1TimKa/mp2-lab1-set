@@ -295,3 +295,25 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, can_compare_for_equality) {
+	TSet A(10);
+	A = 1 + 2 + 5 + 7 + 10;
+	TSet B(10);
+	B = 1 + 2 + 5 + 7 + 10;
+	TSet C(10);
+	C = 5 + 7 + 10;
+	ASSERT_TRUE(A == B);
+	ASSERT_FALSE(A == C);
+}
+
+TEST(TSet, can_compare_for_unequality) {
+	TSet A(10);
+	A = 1 + 2 + 5 + 7 + 10;
+	TSet B(10);
+	B = 1 + 2 + 5 + 7 + 10;
+	TSet C(10);
+	C = 5 + 7 + 10;
+	ASSERT_TRUE(A != C);
+	ASSERT_FALSE(A != B);
+}

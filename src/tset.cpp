@@ -9,19 +9,19 @@
 
 TSet::TSet(int mp) : BitField(mp)
 {
-	MaxPower = mp;
+	maxPower = mp;
 }
 
 // конструктор копирования
 TSet::TSet(const TSet &s) : BitField(s.BitField)
 {
-	MaxPower = s.MaxPower;
+	maxPower = s.maxPower;
 }
 
 // конструктор преобразования типа
 TSet::TSet(const TBitField &bf) : BitField (bf)
 {
-	MaxPower = bf.GetLength();
+	maxPower = bf.GetLength();
 }
 
 TSet::operator TBitField()
@@ -31,7 +31,7 @@ TSet::operator TBitField()
 
 int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
 {
-	return MaxPower;
+	return maxPower;
 }
 
 int TSet::IsMember(const int Elem) const // элемент множества?
@@ -56,7 +56,7 @@ TSet& TSet::operator=(const TSet &s) // присваивание
 	if (&s == this)
 		return *this;
 	BitField = s.BitField;
-	MaxPower = s.MaxPower;
+	maxPower = s.maxPower;
 	return *this;
 }
 
@@ -78,7 +78,7 @@ TSet TSet::operator+(const TSet &s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-	if ((Elem < 0) || (Elem > MaxPower))
+	if ((Elem < 0) || (Elem > maxPower))
 		throw "Element doesn't belong to the set";
 	TSet temp(BitField);
 	temp.BitField.SetBit(Elem);
@@ -88,7 +88,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-	if ((Elem < 0) || (Elem > MaxPower))
+	if ((Elem < 0) || (Elem > maxPower))
 		throw "Element doesn't belong to the set";
 	TSet temp(BitField);
 	temp.BitField.ClrBit(Elem);
@@ -105,7 +105,7 @@ TSet TSet::operator*(const TSet &s) // пересечение
 
 TSet TSet::operator~(void) // дополнение
 {
-	TSet temp(MaxPower);
+	TSet temp(maxPower);
 	temp.BitField = ~BitField;
 	return temp;
 }
@@ -116,7 +116,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 {
 	int i;
 	istr >> i;
-	while ((i > -1) && (i < s.MaxPower)) {
+	while ((i > -1) && (i < s.maxPower)) {
 		s.BitField.SetBit(i);
 		istr >> i;
 	}
@@ -125,7 +125,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-	for (int i = 0; i < s.MaxPower; i++) {
+	for (int i = 0; i < s.maxPower; i++) {
 		if (s.BitField.GetBit(i) == 1)
 			ostr << i << endl; 
 	}
